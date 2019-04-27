@@ -1,0 +1,55 @@
+---
+title: "Tables"
+author: "Shylock"
+date: "4/27/2019"
+output:
+  word_document: default
+  html_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("script002.R")
+library(compareGroups)
+library(purrr)
+library(foreign)
+```
+
+# Summary demographics
+
+```{r demographics, echo=FALSE}
+hh <- ep_data %>% 
+  select(sex_hhh,13:26)
+a <- descrTable(sex_hhh ~ ., hh, hide.no="no", show.all = TRUE)
+export2md(a, strip = TRUE, first = TRUE, 
+          header.background = "blue", header.color = "white", 
+          caption = "Assets owned")
+```
+
+
+
+
+#Assets 
+
+```{r assets, echo=FALSE}
+asT <- ep_data %>% 
+  select(sex_hhh,starts_with("assets"))
+a <- descrTable(sex_hhh ~ ., asT, hide.no="no", show.all = TRUE)
+export2md(a, strip = TRUE, first = TRUE, 
+          header.background = "blue", header.color = "white", 
+          caption = "Assets owned")
+```
+
+
+#Sources of income
+
+```{r income, echo=FALSE}
+inc <- ep_data %>% 
+  select(sex_hhh,143:182)
+a <- descrTable(sex_hhh ~ ., inc, hide.no="no", show.all = TRUE)
+export2md(a, strip = TRUE, first = TRUE, 
+          header.background = "blue", header.color = "white", 
+          caption = "Sources, amounts and types of income")
+```
+
