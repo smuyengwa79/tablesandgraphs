@@ -3,11 +3,28 @@ library(janitor)
 library(tidyverse)
 library(hrbrthemes)
 library(sjPlot)
+<<<<<<< HEAD
 library(foreign)
 
 
 ep_data <- read.spss("data/epworth_data.sav", use.value.labels=TRUE, to.data.frame=TRUE) %>% 
   clean_names()
+=======
+
+ggplot(ep3, aes(x= Wealthquintile,  group=state)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5) +
+  labs(y = "Percent", fill="Weath Quintiles") +
+  labs(x = "", title = "Wealth Quintiles: Musokotwane/Nyawa Chiefdom") 
+
+ggplot(ep3, aes(sex_hhh, number_households_sharing, fill = sex_hhh)) + 
+  geom_boxplot() + 
+  theme_ipsum() + 
+  ggtitle("Number of households sharing rooms by \n sex of household head") + 
+  labs( y = "Number of respondents", x = "") + 
+  theme(legend.position = "none")
+>>>>>>> eaa2e82c884255817ea657e364bec10a3ca47921
 
 # Respondent position 
 sjp.grpfrq(ep_data$respondent_position, ep_data$sex_hhh) + 
