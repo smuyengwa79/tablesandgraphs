@@ -2,12 +2,12 @@ library(haven)
 library(janitor)
 library(tidyverse)
 library(hrbrthemes)
+library(foreign)
 
-epworth_data <- read_sav("data/epworth_data.sav") %>% 
+ep_data <- read.spss("data/epworth_data.sav", use.value.labels=TRUE, to.data.frame=TRUE) %>% 
   clean_names()
 
-write.csv(epworth_data, file = "ep3.csv")
-ep3 <- read.csv("ep3.csv")
+ep3 <- read.csv("data/ep3.csv")
 
 # Sex
 ggplot(ep3, aes(sex_hhh, fill = sex_hhh)) + 
@@ -44,4 +44,12 @@ ggplot(ep3, aes(number_households_sharing, fill = sex_hhh)) +
 #  Structure of the household
 ggplot(ep3, aes(age_respondent, hh_sizefemalefemales_0_5years)) + 
   geom_point()
+
+
+ggplot(ep3, aes(sex_hhh, number_households_sharing, fill = sex_hhh)) + 
+  geom_boxplot() + 
+  theme_ipsum() + 
+  ggtitle("Number of households sharing rooms by \n sex of household head") + 
+  labs( y = "Number of respondents", x = "") + 
+  theme(legend.position = "none")
 
